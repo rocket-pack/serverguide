@@ -21,6 +21,8 @@ Many static websites that operate on a shared host can get by with web or FTP ac
 It's going to take a little while to work through this guide - less if you already know some of the steps, but if you're going to be reading through each bit of text while following the instructions, then you're probably going to need a good 6 hours or so in total to set up the server - it's also worthwhile adding some time for research and in case you get stuck. Don't get scared off though - you can stop at any step, so feel free to spread this over a week or so.
 
 
+---
+
 If you've checked all the boxes, then you're ready to get started! There's only a few things we need to do in this step - log in to the server, and then make sure that it's up-to-date before we start installing all our Rails stuff.
 
 To log in to the server, you'll need a username and password, which should have been provided by your server provided. If you the username hasn't been provided, it's probably `root`.
