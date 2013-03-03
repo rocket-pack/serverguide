@@ -1,4 +1,4 @@
-First Steps & Assumptions
+First Steps
 ====
 
 Great, so you've just got a server sorted out - you've probably got it as a VPS (Virtual Private Server), and have received an email or webpage with the access credentials you need - awesome! Let's get started:
