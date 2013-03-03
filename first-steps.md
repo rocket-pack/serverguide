@@ -33,7 +33,7 @@ You'll need to use the `ssh` command to log in to the server, which is in the fo
   ssh [user]@[host]
 ```
 
-- you'll be prompted for the server password, and then be presented with a _command prompt_ on the server, ready to run commands - it should look something like this:
+You'll be prompted for the server password (which you can copy and paste, or type in), and then be presented with a _command prompt_ on the server, ready to run commands - it should look something like this:
 
 ![Ubuntu Server: Just logged in](first-steps/logged-in.jpg)
 
@@ -45,7 +45,7 @@ Once you're at the command prompt on the server, just run two commands:
   apt-get update
 ```
 
-- this will contact the package serers, and update the 'repository' of packages, ensuring that we will be updating the latest versions of everything. 
+This will contact the package serers, and update the 'repository' of packages, ensuring that we will be updating the latest versions of everything. 
 
 To actually perform the update, run the following command:
 
@@ -53,7 +53,7 @@ To actually perform the update, run the following command:
   apt-get upgrade
 ```
 
-- this command will show you a list of packages that are going to be upgraded, and once you accept the prompt, there will be a small delay while new packages and downloaded and installed.
+This command will show you a list of packages that are going to be upgraded, and once you accept the prompt, there will be a small delay while new packages and downloaded and installed. Once the upgrade has finished, the server _may_ let you know that a reboot is required - it's best to get this out of the way now, so just run `reboot now` to tell the server to restart. While the server restarts you will get kicked out of your SSH session, but you should be able to log back in after a minute or so.
 
 Once the upgrade is complete, you're good to go! You've logged in to the server, and made sure it is up-to-date. As a quick security tip, you might want to set up a reminder to run the upgrade step every couple of weeks - this makes sure your server is running the most recent software and security patches, to keep it bulletproof! 
 
