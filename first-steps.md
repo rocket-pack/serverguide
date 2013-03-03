@@ -58,5 +58,5 @@ This command will show you a list of packages that are going to be upgraded, and
 Once the upgrade is complete, you're good to go! You've logged in to the server, and made sure it is up-to-date. As a quick security tip, you might want to set up a reminder to run the upgrade step every couple of weeks - this makes sure your server is running the most recent software and security patches, to keep it bulletproof! 
 
 
-**Next: [Installing Utilities](install-utilities)**
+**Next: [Secure Access](secure-access)**
 
