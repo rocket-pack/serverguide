@@ -18,17 +18,17 @@ If you are using your own application, and you run into problems with anything t
 Sections
 ---
 
-1. [First Steps & Assumptions](first-steps)
-2. [Secure Access](secure-access)
-3. [Install Utilities](utilities)
-4. [Install database server](database-server)
-5. [Memcached](memcached)
-6. [Install Ruby](ruby)
-7. [Install Passenger](passenger)
-8. [Install Bundler](bundler)
-9. [Configure deploy scripts](deployment)
-10. [Configure monitoring](monitoring)
-11. [Configure backups](backups)
+1. [[First Steps & Assumptions|first-steps]]
+2. [[Secure Access|secure-access]]
+3. [[Install Utilities|utilities]]
+4. [[Install database server|database-server]]
+5. [[Memcached|memcached]]
+6. [[Install Ruby|ruby]]
+7. [[Install Passenger|passenger]]
+8. [[Install Bundler|bundler]]
+9. [[Configure deploy scripts|deployment]]
+10. [[Configure monitoring|monitoring]]
+11. [[Configure backups|backups]]
 
 Authors
 ---
