@@ -35,7 +35,7 @@ Authors
 
 * [Josh McArthur](https://github.com/joshmcarthur)
 
-Licensing
+License
 ---
 
 This guide is published under a creative commons share-alike license. In simple terms, this means:
