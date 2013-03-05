@@ -55,7 +55,11 @@ The next security measure we're going to do involves _public keys_. In case you 
 
 To allow you to log in with your public key,you first need to find it on your computer. If you are using OS X or Linux, you should already have a public key created by your system in a hidden folder within your home folder, in a file called `id_rsa.pub` - open up a terminal on your computer and run `cat ~/.ssh/id_rsa.pub` to output the contents of the fille, and copy this output - this is your public key. If it looks like your public key file does not exist, simply run `ssh-keygen` and follow the prompts to generate your public key.
 
-If you are using Windows,you're most likely using PuTTY to login to your server. Because Windows doesn't support public keys natively, you will need to generate and set up a public key within PuTTY itself. See [this blog post](http://katsande.com/using-puttygen-to-generate-ssh-private-public-keys) for more details on how to do that.
+> If you are using Windows,you're most likely using PuTTY to
+> login to your server. Because Windows doesn't support public
+> keys natively, you will need to generate and set up a public 
+> key within PuTTY itself. See [this blog post]
+> (http://katsande.com/using-puttygen-to-generate-ssh-private-> public-keys) for more details on how to do that.
 
 - find public key
 - add to application user
