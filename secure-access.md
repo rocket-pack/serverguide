@@ -39,12 +39,49 @@ dogbook  ALL=(ALL) ALL
 
 Once you've pasted these, and updated the final rule with the correct username if you didn't create the 'dogbook' user, you can save and exit, by hitting `Esc`, and then typing `:x`.
 
-
 ### SSH security
+
+You've got a secure user set up now, so the next step is to lock down SSH. Remember, SSH is the most common method of logging into a server to manage it, so we want to do our best to make sure that **we're** the only ones who can actually log in.
+
+The first thing we're going to do to secure SSH access is to disallow the root user from logging in via SSH. The reason for this is twofold. First, it will prevent a lot of widespread attacks that try and log in to unsecured servers using the root user and a range of typical passwords. Secondly, now that we've set up `sudo` for your non-privileged user, there's no need to actually log in as root anymore - so we might as well disable it.
+
+To make this change, we need to update the configuration file for the SSH server, which is located at `/etc/ssh/sshd_config`, and add the line:
+
+``` bash
+PermitRootLogin no
+```
+
+The next security measure we're going to do involves _public keys_. In case you haven't come across them before, public keys are a way of accessing a server without requiring a password - in a real life analogy, using a password to access a server is like knocking on a door - why knock, when you can simply use your key and walk right in?
+
+- find public key
+- add to application user
+- test
+- update sshd config
+
+- restrict users
+- why (cat /etc/passwd)
+- sshd change
+
+- restart ssh
+- test
 
 ### Ongoing Protection
 
+- ddos
+- penetration testing
+- fail2ban
+- ports & how they are hacked
+- what is a firewall & how it works
+- installing
+- configuring
+- ongoing firewall config examples
+
 ### Security updates
+
+- why are updates important
+- install unattended updates
+- configure
+- about ubuntu repositories + which to enable
 
 If you've worked your way through these steps, your server should be pretty secure - it has a fixed list of users who may log in, with each of these users having a nice hard-to-brute-force (guess) password, and you've got a layer of protection to prevent any attackers from being able to force their way into the system, along with security updates to make sure any loopholes will be closed quickly. Of course, these protections may not be adequate if somebody chooses to launch any sort of complex, widely-distributed or prolonged attack on your server, however you have built in enough security to prevent all but the most determined attackers from gaining access.
 
