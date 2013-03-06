@@ -81,18 +81,24 @@ And then save the file by hitting `Esc` then `:x`. Once this file is saved, we w
 sudo service ssh restart
 ```
 
+Once the service has restarted, open up a new terminal window on your computer that we can use to test the changes we've made. **Don't forget to stay logged in to the server in at least one window!**.
 
-- find public key
-- add to application user
-- test
-- update sshd config
+First, let's make sure that we can't log in as root - try running this, and make sure that it doesn't allow you to log in to the server:
 
-- restrict users
-- why (cat /etc/passwd)
-- sshd change
+``` bash
+ssh root@your-server-ip
+```
 
-- restart ssh
-- test
+Hopefully that's working for you (well, not working, but working for our purposes) - if not, just re-review the bit above where we set `AllowRootLogin` to `No`.
+
+Next, let's make sure that we can't log in as a user other than your application user - a good test user to use is the `nobody` user, which is a placeholder user created by Ubuntu when it is installed. Try logging in as the `nobody` user - because of the `AllowUser` restriction we put into place, you should not even get to a password prompt:
+
+``` bash
+ssh nobody@your-server-ip
+```
+
+If both of these tests are working out, then all the SSH security restrictions we've put into place are working - well done! The server is now accessible to anyone trying to log in as your application user with either a public key that has been added to the server, or the correct password, but nobody can log in as any other user. Nice!
+
 
 ### Ongoing Protection
 
