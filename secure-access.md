@@ -61,6 +61,27 @@ To allow you to log in with your public key,you first need to find it on your co
 > key within PuTTY itself. See [this blog post]
 > (http://katsande.com/using-puttygen-to-generate-ssh-private-> public-keys) for more details on how to do that.
 
+So,right now you should have your public key copied - we now need to add it to a file on the server called `authorized_keys` - this file is just a list of public keys that are allowed to log in - each public key on a line. To add your public key, start by logging in to your server as your application user, using the password you set up earlier. Once you are logged in, we need to edit the authorized keys file:
+
+``` bash
+vim ~/.ssh/authorized_keys
+```
+
+Right now, this file should be empty, so we just want to paste our key in. Hit the `o` key - in vim-speak, this means "drop onto the next line and switch to insert mode". You can then paste in your public key, and then hit `Esc` then `:x` to save and exit. Once your public key has been added to the `authorized_keys` file, try logging in to the server as the application user - this time, you shouldn't be prompted for your password - you should be let right in!
+
+As a  final step, we need to restrict our SSH access just an little more, so that our application user is the only user who may log in via SSH. To do this, open up your SSH config file again (`vim /etc/ssh/sshd_config`), and then hit `G` to jump to the bottom of the file and then hit `o` to start a new line and enter insert mode, then add the following line, replacing "[application username]" with your application username - e.g. 'dogbook':
+
+``` bash
+AllowUsers [application username]
+```
+
+And then save the file by hitting `Esc` then `:x`. Once this file is saved, we want to restart the SSH server so that our config file changes come into effect - incidentally, this will be the first time we'll be using `sudo` to elevate our application user's privileges - now that we've prevented the root user from logging in, we'll be using `sudo` a lot more. To restart SSH, run the following command - after it finishes, make sure you remain logged in, just in case there's any problems with the config.
+
+``` bash
+sudo service ssh restart
+```
+
+
 - find public key
 - add to application user
 - test
