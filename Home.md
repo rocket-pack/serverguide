@@ -20,7 +20,7 @@ Sections
 
 1. [[First Steps & Assumptions|first-steps]]
 2. [[Secure Access|secure-access]]
-3. [[Install Utilities|utilities]]
+3. [[Install Utilities|install-utilities]]
 4. [[Install database server|database-server]]
 5. [[Memcached|memcached]]
 6. [[Install Ruby|ruby]]
