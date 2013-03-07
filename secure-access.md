@@ -141,23 +141,79 @@ sudo ufw enable
 
 If your terminal is still responding, great! Looks like you still have un-firewalled access! It's worth keeping in mind how to manage your firewall - as you install more services on your server, you might need to add more firewall rules. You can do this by running `sudo ufw allow [service name or port number]` in a terminal, followed by `sudo ufw enable` to activate the rules. If, for whatever reason you need to temporarily disable your firewall, you can run `sudo ufw disable` - just don't forget to re-enable the rules!
 
+The other tool we want to install alongside our firewall is called `fail2ban`. While the firewall protects us from information gathering and hacking on ports that we don't need to be exposed to the outside world, `fail2ban` protects us from brute-force attacks on the services we DO need to be accessible to the public.
 
-- penetration testing
-- fail2ban
-- ports & how they are hacked
-- what is a firewall & how it works
-- installing
-- configuring
-- ongoing firewall config examples
+> A brute force attack is more or less what it says - a person or automated script trying a combination or usernames and passwords, as well as a number of other common hacks, until access is gained.
+
+`fail2ban` actually works in quite a clever way. It will monitor the services we run on the server, the most important of which are SSH (which we already have set up), and the web server (which we'll be installing soon). It is programmed to recognize harmful activities, such as a large amount of incorrect login attempts, and can take actions to prevent these activities, such as banning the IP address that these requests are originating from for a certain period of time.
+
+It's already set up to protect all the services we'll be running on our server, all we need to do is install it on our server. We've already used `apt-get` for upgrading our server, and now we're going to use it for actually installing a new 'package', A package is usually a piece of software, that may also pull in packages it depends on. `apt-get` handles downloading, installing, upgrading and removing packages for us - all we need to do is provide the name of the package we want to work with. In this case, we'll be installing the 'fail2ban' package:
+
+``` bash
+sudo apt-get install fail2ban
+```
+
+Once this is installed, you're all done with your ongoing protection - `fail2ban` and `ufw` should work together nicely to prevent brute-force and information-gathering attacks from making your server vulnerable to a full-blown exploitation.
 
 ### Security updates
 
-- why are updates important
-- install unattended updates
-- configure
-- about ubuntu repositories + which to enable
+As we begin installing many more packages and changing configuration, we expose more and more parts of our server to attack. This is inherently part of adding software, as each new tool we add increases the possibility that a vulnerability exists in that package which could be the entry point for an intruder. Generally, though, the Ubuntu, Debian and Linux communities are all very aware of security issues and closing any loop holes which are discovered - often faster than their equivalents in the OS X and Windows worlds.  Because vulnerabilities are being fixed all the time, keeping our server up-to-date is one of the best ways we can protect our server. If you have a few servers, though, remembering to log in once a week (at least!) to update and upgrade the packages you have installed can be really tough!
+
+To make it easier for our server to remain protected, we're going to install one last tool, which will automatically upgrade our packages on a scheduled basis, to make sure that we're always up-to-date with security patches, without you needing to take any action yourself.
+
+Just like `fail2ban`, we're going to start by installing the package to perform this task - it's called `unattended-upgrades`:
+
+``` bash
+sudo apt-get install unattended-upgrades
+```
+
+Unlike `fail2ban`, however, this package isn't going to work for us straight away - we need to configure a couple of files to make sure that our server upgrades it's packages automatically:
+
+First, the file that adjusts settings for perfoming upgrades - open `/etc/apt/apt.conf.d/10periodic` with VIM:
+
+``` bash
+vim /etc/apt/apt.conf.d/10periodic
+```
+
+And update the file to have the following settings. In VIM, you can delete a line by pressing `dd` (i.e. the `d` key, twice), and then the `o` key to drop a line and go into insert mode. Or, you can just hit `i` to go into insert mode and use the backspace key as you normally would:
+
+``` 
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+```
+
+Once the settings are updated, you can save the file and exit VIM by hitting `Esc` and then `:x`.
+
+Finally, you need to adjust another file to adjust which updates you wish to install. `apt` has a concept of `repositories`, which are different places that packages may be sourced from - for example, the repository we're insterested in is called `security`, and only contains important security updates for packages. Other repositories may include different packages altogether, for example Ubuntu's `non-free` repository, which contains packages that are not available for free and open release - usually audio and video codecs. All we need to do, though, is change the file which controls which repositories we want to install automatic updates from so that we only automatically install security updates, and not every update that comes along:
+
+``` bash
+vim /etc/apt/apt.conf.d/50unattended-upgrades
+```
+
+And remove the line that says `Ubuntu lucid-updates` from the `Unattended-Upgrade::AllowedOrigins` so that it looks like this:
+
+
+``` bash
+Unattended-Upgrade::Allowed-Origins {
+        "Ubuntu lucid-security";
+};
+```
+
+And then save the file and exit VIM by hitting the `Esc` key and then typing `:x`. There's no need to restart any services this time around, because these configuration changes will automatically come into effect next time the unattended upgrades are run.
+
+> #### Dangers of automatically upgrading packages
+> Some Ubuntu users disagree with automatic package upgrades, as it is possible that new versions of packages could introduce new, unwanted features, or break your configuration. Whether you choose to set up automatic upgrades or not is your choice - the main thing is to make sure your server is always up-to-date. We've chosen a pretty safe approach here, by only enabling automatic upgrades from the `security` repository. These packages should only have important security patches, and should not introduce any new behaviour or configuration rules. Still, it's best you know there is a choice here!
+
+---
 
 If you've worked your way through these steps, your server should be pretty secure - it has a fixed list of users who may log in, with each of these users having a nice hard-to-brute-force (guess) password, and you've got a layer of protection to prevent any attackers from being able to force their way into the system, along with security updates to make sure any loopholes will be closed quickly. Of course, these protections may not be adequate if somebody chooses to launch any sort of complex, widely-distributed or prolonged attack on your server, however you have built in enough security to prevent all but the most determined attackers from gaining access.
 
 **Next: [[Installing Utilities|install-utilities]]**
+
+
+### Attribution:
+
+It's been tough to find some clear guides that cover enough server security to make sure that the server is locked-down enough, without going overboard for the situation (assuming your not deploying a banking application!). This portion of the guide is heavily based on [this blog post](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers), and has been extremely helpful in the writing of thise guide. Thanks, [Bryan Kennedy](http://plusbryan.com/)!
 
