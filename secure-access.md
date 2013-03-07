@@ -108,8 +108,9 @@ Remember, the goal here is to protect our server from casual, drive-by attacks u
 
 The first step we're going to take is to set up a firewall. A firewall's main job is block malicious traffic, based on established rules, which may allow or disallow traffic in a number of ways (for example, by IP address or port number).
 
-> #### A word on ports
+> #### Don't know what a port is?
 > A 'port' on a server is a bit like a doorway - except that a server has roughly 10,000 'doorways' available. Each port may have software listening 'on' it, and traffic may go into and out of a port. When a firewall is protecting ports, it is simply closing the door, and not allowing any traffic in or out. Ports are not neccessarily 'locked' to a piece of software, and you can generally change the port that any one application will listen on - for example, the SSH server generally listens on port `22`, however you may change the port to `1022`, or any other port you like. Similarly, the web server we'll be setting up soon listens on two ports - `80` and `443` by default, that handle HTTP (unencrypted) and HTTPS (encrypted) web traffic.
+
 
 - penetration testing
 - fail2ban
