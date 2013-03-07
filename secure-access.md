@@ -102,7 +102,15 @@ If both of these tests are working out, then all the SSH security restrictions w
 
 ### Ongoing Protection
 
-- ddos
+We've got our server generally protected from the bad guys accessing the server, but now it's important that our server is set up to keep any loopholes closed over time. We're going to do that in a couple of ways, but the most important method is a _firewall_ - a piece of software (there are also hardware firewalls, but this is generally something you deal with at the datacenter level), whose role is to only allow certain requests through to the server (for example, allowing SSH, HTTP and HTTPS traffic). We'll deal with that in a moment, but first I'm going to go over some concepts about what we're protecting our server _from_.
+
+Remember, the goal here is to protect our server from casual, drive-by attacks using automated tools or hackers with a low-level of expertise, and we've established that the best way to prevent your server from being hacked is to turn it into a difficult target to get into. One of the first steps of any hacker, and the role of most scripts/hacking tools, is _information gathering_ - running various tests to try and find out versions of software installed on our servers, how the server is set up, and where the weak points are. Once the weak points are known, it is actually very easy to do some damage - whether that is via a denial-of-service attack, where the server is just made to do a lot of work until it is unable to respond to traffic, or a full-blown penetration. Therefore, one of the best things we can do to protect our server in the long-term is to dynamically prevent this information from being gathered.
+
+The first step we're going to take is to set up a firewall. A firewall's main job is block malicious traffic, based on established rules, which may allow or disallow traffic in a number of ways (for example, by IP address or port number).
+
+> #### A word on ports
+> A 'port' on a server is a bit like a doorway - except that a server has roughly 10,000 'doorways' available. Each port may have software listening 'on' it, and traffic may go into and out of a port. When a firewall is protecting ports, it is simply closing the door, and not allowing any traffic in or out. Ports are not neccessarily 'locked' to a piece of software, and you can generally change the port that any one application will listen on - for example, the SSH server generally listens on port `22`, however you may change the port to `1022`, or any other port you like. Similarly, the web server we'll be setting up soon listens on two ports - `80` and `443` by default, that handle HTTP (unencrypted) and HTTPS (encrypted) web traffic.
+
 - penetration testing
 - fail2ban
 - ports & how they are hacked
