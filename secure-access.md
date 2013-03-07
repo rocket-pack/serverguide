@@ -111,6 +111,36 @@ The first step we're going to take is to set up a firewall. A firewall's main jo
 > #### Don't know what a port is?
 > A 'port' on a server is a bit like a doorway - except that a server has roughly 10,000 'doorways' available. Each port may have software listening 'on' it, and traffic may go into and out of a port. When a firewall is protecting ports, it is simply closing the door, and not allowing any traffic in or out. Ports are not neccessarily 'locked' to a piece of software, and you can generally change the port that any one application will listen on - for example, the SSH server generally listens on port `22`, however you may change the port to `1022`, or any other port you like. Similarly, the web server we'll be setting up soon listens on two ports - `80` and `443` by default, that handle HTTP (unencrypted) and HTTPS (encrypted) web traffic.
 
+Ubuntu Server comes built in with a really nice firewall tool called `ufw` (which stands for **U**buntu **F**ire**w**all). This tool acts as a layer between us and the de-facto software firewall on Linux distributions, which is called `iptables`. `iptables` can be used on it's own, however keeping rules up to date can be quite complex and difficult to manage. `ufw` will handle keeping track of our firewall rules, and enabling/disabling our firewall as required. `ufw` should already be installed - if you want to be sure, just run `which ufw` - if this returns a path to a file, then `ufw` is installed.
+
+> If `ufw` is not installed, you can install it using `sudo` and `apt-get` (which we used in the first section of this guide): `sudo apt-get install ufw`.
+
+Before we start blindly adding rules, it's a good idea to think about the types of traffic we need to allow, and whether this traffic needs to be allowed in and or, or one or the other - this is important, because if we're not careful, we could firewall ourselves out of our own server!
+
+> I'll say it now - if you do firewall yourself out of your own server, don't panic! Most VPS or server providers are able to provide you with some kind of secondary, root-level access. For example, [Linode](https://linode.com) provides the [Lish console](http://library.linode.com/troubleshooting/using-lish-the-linode-shell). If your host doesn't provide you with this access, they probably have access themselves - just get in touch with them and explain the situation - it happens more often than you might think!
+
+So, we have three ports that are used by our server that we need to make sure are allowed through our firewall:
+
+1. Port 22 - SSH (in and out traffic)
+2. Port 80 - HTTP (in and out traffic)
+3. Port 443 - HTTPS (in and out traffic)
+
+Each of these ports needs to have inbound AND outbound traffic to ensure everything runs properly. Let's go ahead and add the `ufw` rules for that now:
+
+``` bash
+$ sudo ufw allow ssh
+$ sudo ufw allow http
+$ sudo ufw allow https
+```
+
+Simple as that! The last thing we need to do is 'enable' these rules, so that they come into effect. Take a deep breath, and run the following command to activate your firewall:
+
+``` bash
+sudo ufw enable
+```
+
+If your terminal is still responding, great! Looks like you still have un-firewalled access! It's worth keeping in mind how to manage your firewall - as you install more services on your server, you might need to add more firewall rules. You can do this by running `sudo ufw allow [service name or port number]` in a terminal, followed by `sudo ufw enable` to activate the rules. If, for whatever reason you need to temporarily disable your firewall, you can run `sudo ufw disable` - just don't forget to re-enable the rules!
+
 
 - penetration testing
 - fail2ban
