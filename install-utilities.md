@@ -28,7 +28,19 @@ cat /var/log/syslog | less
 
 #### `grep` 
 
-TODO
+The `grep` command is great for looking for things. It's one of those tools that, if you take the time to properly master, can save you all sorts of time. For our purposes, we're just going to cover searching for simple strings of text - however with full regexp support, and a swathe of other options, `grep` is a very useful tool to learn.
+
+Normally, `grep` is used with a pipe character (`|`) - in most *sh shells. This means that the output of the command preceeding the pipe character will be redirected to the command following. In the second example for `cat`, we 'redirected' the contents of the `/etc/passwd` file to the `grep` command to search for our application username. This is the core of what `grep` does, however there's still a couple of common techniques that you can use:
+
+Search for a string in a file (without using the pipe character):
+``` bash
+grep /etc/passwd "[your application username, e.g. dogbook]"
+```
+
+Search for a string in a folder recursively:
+``` bash
+grep --recursive /etc/ "[your application username, e.g. dogbook]"
+```
 
 #### `tail`
 
