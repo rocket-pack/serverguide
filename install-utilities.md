@@ -44,21 +44,55 @@ grep --recursive /etc/ "[your application username, e.g. dogbook]"
 
 #### `tail`
 
-TODO
+`cat` is all well and good, but if you're dealing with a massive file that you need to search through, or you want to keep an eye on the file as it is being written to (for example, an application log), then `tail` is perfect. Rather than reading the entire file in one go, `tail` will read the file as it changes, outputting the contents to your terminal window.
+
+Keep an eye on the `syslog` (the 'syslog' is the system messages log file on Ubuntu):
+``` bash
+tail -f /var/log/syslog
+```
+
+Keep an eye on the `syslog`, and use `grep` to filter for lines with the number "2" in them:
+``` bash
+tail -f /var/log/syslog | grep "2"
+```
 
 ### Checking on your disks
 
-TODO
+Aside from checking log files every now and again, another common task will be checking the disk space on your server, and cleaning up any large files. Log files in particular, if ignored over time, can easily fill up a disk, and it can be tough to recover from a 100% full disk drive. There's really only two tools you need for keeping track of disk space on Linux, and they're both really easy to use:
 
 #### `df`
 
-TODO
+`df` is a tool that will list the mounted volumes on a disk, their capacity, and the space free on each. It's a good idea to check in every now and then, and if you notice a disk starting to get full, it's time to move onto `du` to track down what's taking up all your disk space.
+
+The use of `df` is really simple. You can use it without any arguments if you like, however, passing '-h' as an argument will tidy up the numbers to make the output much easier to read:
+
+``` bash
+df -h
+```
 
 #### `du`
 
-TODO
+When you need to work out what's taking up space on your disk, `du` becomes really handy. While there are more efficient options to simply find large files on disk (try running `man find` for more information on this), `du` is great for when you already suspect certain folders for large files, and want to figure out where all the large files are. The common arguments we pass to `du` are '-s', and '-h' - these make the output of `du` easier to read, by providing a summary of the size, and outputting the size of files in human terms - megabytes, gigabytes and so on.
+
+To list all the files and folders in the log file:
+``` bash
+du -sh /var/log
+```
+
+To find the total size of the current directory:
+``` bash
+dh -sh .
+```
+
+To list the size of files in the current directory:
+``` bash
+du -sh *
+```
 
 ### Monitoring resources
+
+The last utility you're likely to find yourself using a lot of `htop`. `htop` builds upon `top`, which is a tool for listing running processes, and how much processing time and memory each is consuming. To see the output of `top`, simply run `top` with no arguments. `htop` provides similar base functionality to `top`, but provides some handy additions, such as color highlighting, more helpful statistics, and the ability to easily control each process - for example, sorting and searching for processes, and killing out-of-control processes.
+
 
 #### `htop`
 
