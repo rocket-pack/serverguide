@@ -19,7 +19,7 @@ The user who you are logged in as at the moment is called the 'root' user. The r
 First, let's create our user. What you call this user is up to you - some people like using 'deployer', or 'admin' as a username. I prefer to use the name of our application, just in case I need more users further down the track. So, if you are using the example application, we are going to use 'dogbook' as the username.
 
 ``` bash
-adduser deployer
+adduser dogbook
 ```
 
 ![Ubuntu Server: Adding a non-privileged user](secure-access/adduser.jpg)
