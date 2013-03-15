@@ -139,7 +139,19 @@ Simple as that! The last thing we need to do is 'enable' these rules, so that th
 sudo ufw enable
 ```
 
-If your terminal is still responding, great! Looks like you still have un-firewalled access! It's worth keeping in mind how to manage your firewall - as you install more services on your server, you might need to add more firewall rules. You can do this by running `sudo ufw allow [service name or port number]` in a terminal, followed by `sudo ufw enable` to activate the rules. If, for whatever reason you need to temporarily disable your firewall, you can run `sudo ufw disable` - just don't forget to re-enable the rules!
+If your terminal is still responding, great! Looks like you still have un-firewalled access! However you will not be able to run 
+
+``` bash
+sudo apt-get install [package-name]
+```
+
+or anything else that requires outbound access on any port. This is because the newly added ports to the firewall rules dont come into effect until the server is restarted. With that in mind, please restart your sever before continuing the guide:
+
+``` bash
+sudo reboot now
+```
+
+It's worth keeping in mind how to manage your firewall - as you install more services on your server, you might need to add more firewall rules. You can do this by running `sudo ufw allow [service name or port number]` in a terminal, followed by `sudo ufw enable` to activate the rules. If, for whatever reason you need to temporarily disable your firewall, you can run `sudo ufw disable` - just don't forget to re-enable the rules!
 
 The other tool we want to install alongside our firewall is called `fail2ban`. While the firewall protects us from information gathering and hacking on ports that we don't need to be exposed to the outside world, `fail2ban` protects us from brute-force attacks on the services we DO need to be accessible to the public.
 
