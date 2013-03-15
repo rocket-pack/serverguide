@@ -67,7 +67,7 @@ So,right now you should have your public key copied - we now need to add it to a
 vim ~/.ssh/authorized_keys
 ```
 
-Right now, this file should be empty, so we just want to paste our key in. Hit the `o` key - in vim-speak, this means "drop onto the next line and switch to insert mode". You can then paste in your public key, and then hit `Esc` then `:x` to save and exit. Once your public key has been added to the `authorized_keys` file, try logging in to the server as the application user - this time, you shouldn't be prompted for your password - you should be let right in!
+Right now, this file should be empty (unless your hosting provider has already copied their public key to your server), so we just want to paste our key in. Hit the `o` key - in vim-speak, this means "drop onto the next line and switch to insert mode". You can then paste in your public key, and then hit `Esc` then `:x` to save and exit. Once your public key has been added to the `authorized_keys` file, try logging in to the server as the application user - this time, you shouldn't be prompted for your password - you should be let right in!
 
 As a  final step, we need to restrict our SSH access just an little more, so that our application user is the only user who may log in via SSH. To do this, open up your SSH config file again (`vim /etc/ssh/sshd_config`), and then hit `G` to jump to the bottom of the file and then hit `o` to start a new line and enter insert mode, then add the following line, replacing "[application username]" with your application username - e.g. 'dogbook':
 
