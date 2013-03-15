@@ -1,8 +1,10 @@
 ### Install the database packages
+``` bash
 sudo apt-get install libpq-dev
 sudo add-apt-repository ppa:pitti/postgresql
 sudo apt-get update
 sudo apt-get install postgresql-9.2
+```
 
 ### login as the default postgres user
 sudo -u postgres psql -d template1
