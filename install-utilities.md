@@ -91,12 +91,29 @@ du -sh *
 
 ### Monitoring resources
 
-The last utility you're likely to find yourself using a lot of `htop`. `htop` builds upon `top`, which is a tool for listing running processes, and how much processing time and memory each is consuming. To see the output of `top`, simply run `top` with no arguments. `htop` provides similar base functionality to `top`, but provides some handy additions, such as color highlighting, more helpful statistics, and the ability to easily control each process - for example, sorting and searching for processes, and killing out-of-control processes.
+The last utility you're likely to find yourself using a lot of `htop`. `htop` builds upon `top`, which is a tool for listing running processes, and how much processing time and memory each is consuming. To see the output of `top`, simply run `top` with no arguments. `htop` provides similar functionality to `top`, but provides some handy additions, such as color highlighting, more helpful statistics, and the ability to easily control each process - for example, sorting and searching for processes, and killing out-of-control processes. 
 
+First of all, to install `htop`, just use `apt-get`:
 
-#### `htop`
+``` bash
+sudo apt-get install htop
+```
 
-TODO
+And then run the program by running `htop`, where you'll see output like this:
+
+![htop](utilities/htop.png)
+
+Once `htop` is open, you can use a number of keyboard commands to adust what you see:
+
+* Sorting:
+* Searching:
+* Killing processes:
+
+If you run into any problems with your server, it'll be `htop` that will be a good first port of call - take a look, and check for any processes that have been running for a long time, or are using a lot of CPU time or memory.
+
+While it may be the packages that we install soon that will form the backbone of your server, it'll be these utilities that you use most often. They're a great place to start when debugging any performance problems, and offer a great deal more power should you wish to learn more about them. If you forget how to run any of these utilities, or if you want to find out how you can perform more advanced tasks with them, just use `man` on your server (`man` stands for 'manual'), followed by the command you want to know more about - for example, `man du` will tell you more about the `du` command.
+
+**Next:** [[Installing Ruby|ruby]]
 
 
 
