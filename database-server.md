@@ -27,14 +27,14 @@ sudo netstat -lp | grep postgresql
 ```
 
 Reset to default port (or change port if necessary)
-``` bash 
+``` bash
 sudo vim /etc/postgresql/9.2/main/postgresql.conf
 ```
 
 Change the port value in the conf file
-``` 
-port = 5432 
-``` 
+```
+port = 5432
+```
 
 Restart postgres to pick up the new configuration changes
 ``` bash
