@@ -8,7 +8,7 @@ sudo apt-get update
 sudo apt-get install postgresql-9.2
 ```
 
-### Setup User and Database
+### Setup User
 
 login as the default postgres user
 ``` bash
@@ -20,6 +20,8 @@ postgres=# ``` CREATE USER dogbook WITH PASSWORD '$password'; ```
 
 Quit the database session
 postgres=# ``` \q ```
+
+### Port
 
 To check that the default port of ``` 5432 ``` is correctly set run the following command:
 ``` bash
