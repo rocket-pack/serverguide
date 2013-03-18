@@ -33,3 +33,9 @@ Create a file in ``` /etc/apache2/sites-available/ ``` for your site, for exampl
     DocumentRoot /home/dogbook/apps/dogbook/public # Note the 'public' directory
 </VirtualHost>
 ```
+
+Enable our new site:
+``` bash
+sudo a2ensite dogbook.co.nz
+sudo /etc/init.d/apache2 restart
+```
