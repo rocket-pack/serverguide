@@ -36,14 +36,34 @@ sudo netstat -lp | grep postgresql
 
 ### Setup User
 
-login as the default postgres user
+With the database server installed, we're almost all set to configure our Rails application to connect and use PostgreSQL to store our data. The last thing we need to do is create a 'user' in the database server. This user is different to the user that we set up when we were first getting our server set up (although it can have the same name) - it's just to access the database. 
+
+We're going to set up a 'passwordless' user account in PostgreSQL that should let us in without any problems as long as we are logged in as our application user on the server. 
+
+> A passwordless user account may not be the safest option for you if you are going to be storing a lot of sensitive data in your application. For most needs though, it provides a way of authenticating with the database that is quick, easy, and just works. If you _would_ like to set a password for you user, just can just run the following command once you've created the user account as outlined below: `psql -c "ALTER USER [application  user] WITH ENCRYPTED PASSWORD '[your secure password]';"`.
+
+To create the user account, we first need to change the user account we are logged in as - right now, we're logged in as the application user that we created when we were first setting up our server, but we need to now be logged in as a user called "postgres" - this is a special user account that automatically has top-level access to the PostgreSQL database server. 
+
+Because we can already use `sudo`, we can also use `su`, to switch users, using the following command:
+
 ``` bash
-sudo -u postgres psql
+sudo su postgres
 ```
 
-Create a user for your application (change $password to a real password and dogbook with your application name):
-postgres=# ``` CREATE USER dogbook WITH PASSWORD '$password'; ```
+You should notice that the 'prompt' (the text that shows before you enter a command) has changed - it should now read "postgres@your-hostname" - this means you are logged in as the "postgres" user. 
 
-Quit the database session
-postgres=# ``` \q ```
+Once you are logged in as Postgres, you need to issue a single command to create the user account we will use in our Rails app to connect. Let's set the name of this user account to be the same as our application account (for example, 'dogbook'). Here's the command you need to run:
 
+``` bash
+createuser [your appliction name]
+```
+
+You'll be prompted for three levels of permission, and you should answer 'No' for each - the fewer priviledges this user account has, the better. 
+
+Once this command has finished, you can type `exit` to log out of the 'postgres' user account and return to your application user. To check that the database user account is set up correctly, try running this command:
+
+``` bash
+psql
+```
+
+If this returns the error "psql: FATAL:  database [user name] does not exist" - it's working correctly - we just haven't created a database for our application yet. If it returns a different error, or asks for a password, you may want to re-check how this user is set up.
