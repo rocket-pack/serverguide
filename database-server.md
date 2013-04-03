@@ -17,17 +17,22 @@ sudo apt-get update
 
 If you're using Ubuntu 12.10 or later, the packages we are about to install are already in the default Ubuntu repositories, so we don't need to add anything - we can just install PostgreSQL!
 
----
+To install the database server, we need to tell `apt-get` to download and install a two packages - one being the database server itself, and the other being a development library that Rails will require to talk to the PostgreSQL database.
 
+Here's the command to install PostgreSQL:
 
-
-Install the database packages
 ``` bash
-sudo apt-get install libpq-dev
-sudo add-apt-repository ppa:pitti/postgresql
-sudo apt-get update
-sudo apt-get install postgresql-9.2
+sudo apt-get install postgresql-9.2 libpq-dev
 ```
+
+Once this command has completed (which may take some time), you should have PostgeSQL installed and running (you may have seen some messages while it installed about starting the database server and setting up clusters). By default, PostgreSQL runs on port number '5432' - to prevent confusion when we begin trying to connect to our database, let's run a quick command to make sure that PostgreSQL is indeed running and listening on that port:
+
+
+``` bash
+sudo netstat -lp | grep postgresql
+```
+
+> If the command above doesn't print anything out, it's possible that PostgreSQL is running on a different port. You should be able to fix this by opening /etc/postgresql/9.2/main/postgresql.conf and checking the value of the 'port' configuration setting. If this isn't set to '5432', set it, save the file, and restart the database server by running `sudo /etc/init.d/postgresql restart`.
 
 ### Setup User
 
@@ -42,24 +47,3 @@ postgres=# ``` CREATE USER dogbook WITH PASSWORD '$password'; ```
 Quit the database session
 postgres=# ``` \q ```
 
-### Port
-
-To check that the default port of ``` 5432 ``` is correctly set run the following command:
-``` bash
-sudo netstat -lp | grep postgresql
-```
-
-Reset to default port or change port if necessary
-``` bash
-sudo vim /etc/postgresql/9.2/main/postgresql.conf
-```
-
-Change the port value in the conf file
-```
-port = 5432
-```
-
-Restart postgres to pick up the new configuration changes
-``` bash
-sudo /etc/init.d/postgresql reload
-```
