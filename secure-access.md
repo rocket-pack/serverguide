@@ -5,7 +5,7 @@ Securing a server isn't really scary. For most servers, security isn't about mak
 
 You should still be logged in as the 'root' user from the 'first steps' section - if you're not, log in now, as we'll be running commands on the server throughout this section.
 
-There's three main areas that we want to work on in this section, that we'll walk through one-by-one:
+There's four main areas that we want to work on in this section, that we'll walk through one-by-one:
 
 1. User management and access
 2. SSH security
@@ -68,6 +68,18 @@ vim ~/.ssh/authorized_keys
 ```
 
 Right now, this file should be empty (unless your hosting provider has already copied their public key to your server), so we just want to paste our key in. Hit the `o` key - in vim-speak, this means "drop onto the next line and switch to insert mode". You can then paste in your public key, and then hit `Esc` then `:x` to save and exit. Once your public key has been added to the `authorized_keys` file, try logging in to the server as the application user - this time, you shouldn't be prompted for your password - you should be let right in!
+
+> ***What to do if there is no ```~/.ssh``` directory.*** When you login as your new user, generally speaking it will not have a ``` ~/.ssh ``` directory or the ``` ~/.ssh/authorized_keys ``` file. You will need to create these commands in terminal:
+``` bash
+mkdir ~/.ssh
+touch ~/.ssh/authorized_keys
+```
+
+>Also we will need to update the permissions on each so the ssh daemon will trust the files:
+``` bash
+chmod 700 ~/.ssh
+chmod 644 ~/.ssh/authorized_keys
+```
 
 As a  final step, we need to restrict our SSH access just an little more, so that our application user is the only user who may log in via SSH. To do this, open up your SSH config file again (`vim /etc/ssh/sshd_config`), and then hit `G` to jump to the bottom of the file and then hit `o` to start a new line and enter insert mode, then add the following line, replacing "[application username]" with your application username - e.g. 'dogbook':
 
@@ -228,4 +240,3 @@ If you've worked your way through these steps, your server should be pretty secu
 ### Attribution:
 
 It's been tough to find some clear guides that cover enough server security to make sure that the server is locked-down enough, without going overboard for the situation (assuming your not deploying a banking application!). This portion of the guide is heavily based on [this blog post](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers), and has been extremely helpful in the writing of thise guide. Thanks, [Bryan Kennedy](http://plusbryan.com/)!
-
