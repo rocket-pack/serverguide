@@ -22,7 +22,7 @@ Sections
 2. [[Secure Access|secure-access]]
 3. [[Install Utilities|install-utilities]]
 4. [[Install database server|database-server]]
-5. [[Memcached|memcached]]
+5. [[Install Memcached|memcached]]
 6. [[Install Ruby|ruby]]
 7. [[Install Passenger|passenger]]
 8. [[Install Bundler|bundler]]
