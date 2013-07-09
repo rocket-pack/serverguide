@@ -53,7 +53,7 @@ Run the following command to install Bundler:
 gem install bundler --no-rdoc --no-ri
 ```
 
-You should see some output about 'Fetching bundler-x.x.x.gem', and then see something like 'Bundler x.x.x installed.' **rbenv users, you should run `rbenv_rehash` now to update rbenv**. To make sure it's installed, try running `bundle help` to bring up the help doc for Bundler - have a read, and hit 'q' when you're ready to carry on to deploying your application.
+You should see some output about 'Fetching bundler-x.x.x.gem', and then see something like 'Bundler x.x.x installed.' **rbenv users, you should run `rbenv rehash` now to update rbenv**. To make sure it's installed, try running `bundle help` to bring up the help doc for Bundler - have a read, and hit 'q' when you're ready to carry on to deploying your application.
 
 In this section, we covered a lot of the foundations about how gems are installed and loaded, and the best place to put things on your server when you're installing global, system-level gems. In the next section, we're going to cover how to actually deploy your application using `bundler` and `Capistrano`.
 
