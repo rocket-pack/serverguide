@@ -70,6 +70,7 @@ First, head over to the [RVM website](https://rvm.io), and have a read of the fe
 * Set up `rbenv` to be set up when you log in: `echo 'eval "$(rbenv init -)"' >> ~/.bashrc`.
 * Log out of your SSH session and log back in to ensure rbenv has been loaded.
 * Install the `ruby-build` rbenv plugin: `mkdir -p ~/.rbenv/plugins/` and `git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build`
+* Reload your session `source ~/.bashrc`
 * Install Ruby: `rbenv install 2.0.0-p0` and tell rbenv to reload: `rbenv rehash`. 
 * Finally, set this version of Ruby we just installed as the default, system Ruby: `rbenv global 2.0.0-p0`.
 
