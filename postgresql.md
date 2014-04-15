@@ -41,5 +41,9 @@ createdb [app name]_production --owner=[application account name] --encoding=uni
 ```
 Repeat this command if you require another database for staging - you might want to run this application in the `draft` Rails environment, so you should name your database accordingly.
 
+---
 
+Once you've performed these tasks, the setup of PostgreSQL is complete. You should be able to connect to your Rails application database from your local account now - make sure you're logged in as your application user again (hint: if you're still logged in as postgres from running `sudo su postgres`, you can just type `exit` to jump back to your app user), and run `psql [your database name]` - you should be dropped into a database console without any access issues. You can exit this console by hitting `\q`.
+
+If you _did_ have access issues, go back and check your database user is named the same as your app user, and that the databases you need were created correctly with the `--owner=[app user]` flag.
 
