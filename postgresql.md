@@ -80,3 +80,5 @@ Once you've performed these tasks, the setup of PostgreSQL is complete. You shou
 
 If you _did_ have access issues, go back and check your database user is named the same as your app user, and that the databases you need were created correctly with the `--owner=[app user]` flag.
 
+> Hint: If you forget what databases you have, log in as the 'postgres' user, enter `psql` to launch a database console, and type in `\l` to list all databases.
+
