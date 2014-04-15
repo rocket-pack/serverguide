@@ -4,13 +4,46 @@ The latest version takes a long time to get to Ubuntu, so it's best to add the A
 
 ### Add the APT repository:
 
-Follow the instructions on the PostgreSQL APT wiki page: https://wiki.postgresql.org/wiki/Apt.
+> Note: These instructions were derived from the PostgreSQL APT wiki page - check there for details: https://wiki.postgresql.org/wiki/Apt.
 
-Once the apt repository is added, the latest version of postgres can be installed:
+You'll be adding a custom APT repository to install Postgres directly from the supplier - to do that, you need to add a '.list' file listing where the software can be found. Many APT repositories package their software for different versions of Debian, which Ubuntu is based upon, so you'll need your release name to add the correct repository data. 
+
+You can get your release name by running the following command:
 
 ``` bash
-sudo apt-get install postgresql-9.3 libpq-dev
+lsb_release -c
 ```
+
+This should return a single-word release for your installation - for example, Ubuntun 12.04 will return 'precise'.
+
+Copy this release name, and open vim in a new .list file by running the following command:
+
+``` bash
+sudo vim /etc/apt/sources.list.d/pgdg.list
+```
+
+Hit 'i' to go into insert mode, and paste in the following source:
+
+```
+deb http://apt.postgresql.org/pub/repos/apt/ [RELEASE NAME]-pgdg main
+```
+
+Replace [RELEASE NAME] with your release name you copied above, then hit <kbd>Esc</kbd>, and then type <kbd>:x</kbd> to write the file and exit.
+
+Now that the file is in place, we can update our APT sources and install Postgres from the latest release. First, run `apt-get update`:
+
+``` bash
+sudo apt-get update
+```
+
+Then run the install process:
+
+``` bash
+sudo apt-get install postgresql-9.3 libpg-dev
+```
+
+Once this is done, Postgres will be installed and running. You might be able to spot it in the process list by running `htop`.
+
 
 ### Set up application database user
 
