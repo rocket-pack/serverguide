@@ -12,6 +12,9 @@ Once the gem has been downloaded, run this command to start the passenger instal
 ``` bash
 passenger-install-apache2-module
 ```
+
+If that does not work, make sure you have run `rbenv rehash`.
+
 Follow the onscreen instructions during the install and once passenger has successfully installed its time to update our apache config as per the post install message.
 
 Copy and paste the lines from the output into your apache config:
@@ -26,11 +29,11 @@ sudo a2enmod rewrite
 
 Create a file in ``` /etc/apache2/sites-available/ ``` for your site, for example ``` dogbook.co.nz ```:
 ``` bash
-<VirtualHost *>
+<VirtualHost *:80>
     # Change these 3 lines to suit your project
     RailsEnv production
     ServerName dogbook.co.nz
-    DocumentRoot /home/dogbook/apps/dogbook/public # Note the 'public' directory
+    DocumentRoot /home/dogbook/apps/dogbook/public
 </VirtualHost>
 ```
 
