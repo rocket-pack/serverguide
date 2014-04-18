@@ -1,6 +1,6 @@
 Before we install passenger, lets first install apache2 if its not already on the server:
 ``` bash
-sudo apt-get install apache2 apache2-mpm-prefork apache2-prefork-dev
+sudo apt-get install apache2 apache2-mpm-prefork apache2-prefork-dev libcurl4-openssl-dev
 ```
 
 Once you have ruby on the server, we can install passenger via a handy gem: 
