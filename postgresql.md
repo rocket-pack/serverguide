@@ -6,7 +6,7 @@ The latest version takes a long time to get to Ubuntu, so it's best to add the A
 
 > Note: These instructions were derived from the PostgreSQL APT wiki page - check there for details: https://wiki.postgresql.org/wiki/Apt.
 
-You'll be adding a custom APT repository to install Postgres directly from the supplier - to do that, you need to add a '.list' file listing where the software can be found. Many APT repositories package their software for different versions of Debian, which Ubuntu is based upon, so you'll need your release name to add the correct repository data. 
+You'll be adding a custom APT repository to install Postgres directly from the supplier - to do that, you need to add a '.list' file listing where the software can be found. Many APT repositories package their software for different versions of Debian, which Ubuntu is based upon, so you'll need your release name to add the correct repository data.
 
 You can get your release name by running the following command:
 
@@ -39,7 +39,7 @@ sudo apt-get update
 Then run the install process:
 
 ``` bash
-sudo apt-get install postgresql-9.3 libpg-dev
+sudo apt-get install postgresql-9.3 libpq-dev
 ```
 
 Once this is done, Postgres will be installed and running. You might be able to spot it in the process list by running `htop`.
@@ -47,7 +47,7 @@ Once this is done, Postgres will be installed and running. You might be able to 
 
 ### Set up application database user
 
-If you're connecting to the database from the local host, then you can do so without requiring a password. The only thing you need to do to accomplish this is have a Postgres role name matching the name of a local system user. 
+If you're connecting to the database from the local host, then you can do so without requiring a password. The only thing you need to do to accomplish this is have a Postgres role name matching the name of a local system user.
 
 When you installed Postgres, a number of helpful utilities were also installed:
 
@@ -56,7 +56,7 @@ When you installed Postgres, a number of helpful utilities were also installed:
 * `createdb` - for creating databases in Postgres. You should generally always use the `--encoding=unicode` and `--owner=[application user]` flags for this command.
 * `dropdb` - for deleting databases.
 
-Another thing you got when you installed was a `postgres` user. You can `sudo su postgres` to change to this user and have superuser access to the database. 
+Another thing you got when you installed was a `postgres` user. You can `sudo su postgres` to change to this user and have superuser access to the database.
 
 To create the application user, you can use the `createuser` command. You can just answer 'no' to all the prompts - your app user doesn't need any special access:
 
